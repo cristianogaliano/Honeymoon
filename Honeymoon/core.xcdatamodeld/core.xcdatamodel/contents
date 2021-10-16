@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19141.11" systemVersion="21A5304g" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DestinationData" representedClassName="DestinationData" syncable="YES" codeGenerationType="class">
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="like" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="place" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
+    <entity name="Entity2" representedClassName="Entity2" syncable="YES" codeGenerationType="class"/>
+    <elements>
+        <element name="Entity2" positionX="-63" positionY="-18" width="128" height="14"/>
+        <element name="DestinationData" positionX="-63" positionY="-18" width="128" height="14"/>
+        <element name="Entity" positionX="-54" positionY="-9" width="128" height="14"/>
+    </elements>
+</model>
