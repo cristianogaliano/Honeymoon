@@ -23,7 +23,7 @@ struct SettingsView: View {
             HStack {
                 Button {
                     showsInfo = true
-                    playSound(file: "sound-click", type: "mp3")
+                    audioFXPlayer.playSoundClick()
                     haptic.impactOccurred()
                 } label: {
                     Image(systemName: "info.circle")
@@ -39,7 +39,7 @@ struct SettingsView: View {
                 
                 Button {
                     showsInfo = false
-                    playSound(file: "sound-click", type: "mp3")
+                    audioFXPlayer.playSoundClick()
                     haptic.impactOccurred()
                 } label: {
                     Image(systemName: "questionmark.circle")

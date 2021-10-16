@@ -119,7 +119,7 @@ struct MainView: View {
     func fetchDestinationsPreferences() {
         if let userEmail = session.session?.email {
             
-            let listener = db.collection("Users").document(userEmail).collection("PlacePreferences").addSnapshotListener({ querySnapshot, error in
+            _ = db.collection("Users").document(userEmail).collection("PlacePreferences").addSnapshotListener({ querySnapshot, error in
                 guard let preferences = querySnapshot?.documents else {
                     print("Error fetching preferences: \(error!)")
                     return

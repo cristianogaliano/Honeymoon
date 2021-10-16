@@ -17,8 +17,8 @@ struct HeaderView: View {
         VStack {
             HStack {
                 Button {
-                    session.signOut()
-                    playSound(file: "sound-click", type: "mp3")
+                   _ = session.signOut()
+                    audioFXPlayer.playSoundClick()
                     feedback.notificationOccurred(.warning)
                 } label: {
                     Image(systemName: "person.crop.circle.badge.xmark")
@@ -37,7 +37,7 @@ struct HeaderView: View {
                 
                 
                 Button {
-                    playSound(file: "sound-click", type: "mp3")
+                    audioFXPlayer.playSoundClick()
                     haptic.impactOccurred()
                     showSettings.toggle()
                 } label: {

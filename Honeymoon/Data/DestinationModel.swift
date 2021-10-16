@@ -6,7 +6,10 @@
 //
 
 import SwiftUI
+import Firebase
 
+
+//MODEL DESTINATION AND PROMOTION
 struct Destination {
     var id: String
     var place: String
@@ -24,4 +27,8 @@ struct Promotion {
     var image: String
 }
 
+// MARK: - DESTINATIONS STORED FILE
+var destinationsArray: [Destination] = [Destination]()
 
+// MARK: - FIRESTORE REFERENCE
+let db = Firestore.firestore()

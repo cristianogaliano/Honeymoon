@@ -177,13 +177,13 @@ struct ContentView: View {
                                 .onEnded({ value in
                                     guard case .second(true, let drag?) = value else { return }
                                     if drag.translation.width < -dragAreaThreshold {
-                                        playSound(file: "sound-click", type: "mp3")
+                                        audioFXPlayer.playSoundClick()
                                         haptic.impactOccurred()
                                         savePreference(of: cardView, like: false)
                                         moveCards()
                                     }
                                     if drag.translation.width > dragAreaThreshold {
-                                        playSound(file: "sound-rise", type: "mp3")
+                                        audioFXPlayer.playSoundRise()
                                         feedback.notificationOccurred(.success)
                                         savePreference(of: cardView, like: true)
                                         moveCards()

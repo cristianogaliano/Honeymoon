@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4E2BA89126FAA11600CAF060 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2BA89026FAA11600CAF060 /* MainView.swift */; };
+		4EA6C24D271A882100DE3316 /* AudioFXPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA6C24C271A882000DE3316 /* AudioFXPlayer.swift */; };
+		4EA6C250271A8CD300DE3316 /* InitFirestoreDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA6C24F271A8CD300DE3316 /* InitFirestoreDatabase.swift */; };
 		4EA9669226FFDB4600481D78 /* PackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9669126FFDB4600481D78 /* PackageView.swift */; };
 		4EA9669526FFF56100481D78 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9669426FFF56100481D78 /* SettingsView.swift */; };
 		4EB0EB0826F56D8B00B17E85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EB0EB0726F56D8B00B17E85 /* GoogleService-Info.plist */; };
@@ -30,7 +32,7 @@
 		B8E5A11026CE144D00B3D7A7 /* sound-rise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8E5A10E26CE144D00B3D7A7 /* sound-rise.mp3 */; };
 		B8E5A11126CE144D00B3D7A7 /* sound-click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8E5A10F26CE144D00B3D7A7 /* sound-click.mp3 */; };
 		B8E5A12126CF040900B3D7A7 /* DestinationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A12026CF040900B3D7A7 /* DestinationModel.swift */; };
-		B8E5A12426CF046200B3D7A7 /* DemoDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A12326CF046200B3D7A7 /* DemoDestinations.swift */; };
+		B8E5A12426CF046200B3D7A7 /* PreviewDemoDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A12326CF046200B3D7A7 /* PreviewDemoDestinations.swift */; };
 		B8E5A12626CF04FC00B3D7A7 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A12526CF04FC00B3D7A7 /* CardView.swift */; };
 		B8E5A12826CF07CB00B3D7A7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A12726CF07CB00B3D7A7 /* HeaderView.swift */; };
 		B8E5A12A26CF09C300B3D7A7 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A12926CF09C300B3D7A7 /* FooterView.swift */; };
@@ -44,12 +46,14 @@
 		B8E5A14126CF272D00B3D7A7 /* LinkRowAppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A14026CF272D00B3D7A7 /* LinkRowAppInfoView.swift */; };
 		B8E5A14326CF274400B3D7A7 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A14226CF274400B3D7A7 /* CreditsView.swift */; };
 		B8E5A14726D0922500B3D7A7 /* CardTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A14626D0922500B3D7A7 /* CardTransition.swift */; };
-		B8E5A14A26D094DC00B3D7A7 /* Global and GeneralUility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A14926D094DC00B3D7A7 /* Global and GeneralUility.swift */; };
+		B8E5A14A26D094DC00B3D7A7 /* Haptics Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E5A14926D094DC00B3D7A7 /* Haptics Feedback.swift */; };
 		B8E5A17A26D1B34500B3D7A7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8E5A17926D1B34500B3D7A7 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4E2BA89026FAA11600CAF060 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		4EA6C24C271A882000DE3316 /* AudioFXPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFXPlayer.swift; sourceTree = "<group>"; };
+		4EA6C24F271A8CD300DE3316 /* InitFirestoreDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitFirestoreDatabase.swift; sourceTree = "<group>"; };
 		4EA9669126FFDB4600481D78 /* PackageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageView.swift; sourceTree = "<group>"; };
 		4EA9669426FFF56100481D78 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4EB0EAFD26F46F0900B17E85 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -73,7 +77,7 @@
 		B8E5A10F26CE144D00B3D7A7 /* sound-click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sound-click.mp3"; sourceTree = "<group>"; };
 		B8E5A11626CE167C00B3D7A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B8E5A12026CF040900B3D7A7 /* DestinationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationModel.swift; sourceTree = "<group>"; };
-		B8E5A12326CF046200B3D7A7 /* DemoDestinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoDestinations.swift; sourceTree = "<group>"; };
+		B8E5A12326CF046200B3D7A7 /* PreviewDemoDestinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDemoDestinations.swift; sourceTree = "<group>"; };
 		B8E5A12526CF04FC00B3D7A7 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		B8E5A12726CF07CB00B3D7A7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		B8E5A12926CF09C300B3D7A7 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
@@ -87,7 +91,7 @@
 		B8E5A14026CF272D00B3D7A7 /* LinkRowAppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkRowAppInfoView.swift; sourceTree = "<group>"; };
 		B8E5A14226CF274400B3D7A7 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		B8E5A14626D0922500B3D7A7 /* CardTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTransition.swift; sourceTree = "<group>"; };
-		B8E5A14926D094DC00B3D7A7 /* Global and GeneralUility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global and GeneralUility.swift"; sourceTree = "<group>"; };
+		B8E5A14926D094DC00B3D7A7 /* Haptics Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Haptics Feedback.swift"; sourceTree = "<group>"; };
 		B8E5A17926D1B34500B3D7A7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +147,16 @@
 			path = SETTINGS;
 			sourceTree = "<group>";
 		};
+		4EA6C24E271A8A3400DE3316 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B8E5A12326CF046200B3D7A7 /* PreviewDemoDestinations.swift */,
+				B8E5A12026CF040900B3D7A7 /* DestinationModel.swift */,
+				4EA6C24F271A8CD300DE3316 /* InitFirestoreDatabase.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		4EA9668E26FFDAC200481D78 /* ContentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,10 +198,11 @@
 		B8E5A0F926CE13D700B3D7A7 /* Honeymoon */ = {
 			isa = PBXGroup;
 			children = (
-				B8E5A14826D094CE00B3D7A7 /* Utility Model */,
-				B8E5A11F26CF03F700B3D7A7 /* Model */,
-				B8E5A11526CE153A00B3D7A7 /* View */,
-				B8E5A11426CE153500B3D7A7 /* VM App */,
+				B8E5A0FA26CE13D700B3D7A7 /* HoneymoonApp.swift */,
+				4EA6C24E271A8A3400DE3316 /* Data */,
+				B8E5A14826D094CE00B3D7A7 /* Utility */,
+				B8E5A11F26CF03F700B3D7A7 /* AUTH Model */,
+				B8E5A11426CE153500B3D7A7 /* View */,
 				B8E5A0FE26CE13D800B3D7A7 /* Assets.xcassets */,
 				B8E5A17926D1B34500B3D7A7 /* Launch Screen.storyboard */,
 				4EB0EB0726F56D8B00B17E85 /* GoogleService-Info.plist */,
@@ -214,36 +229,34 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
-		B8E5A11426CE153500B3D7A7 /* VM App */ = {
+		B8E5A11426CE153500B3D7A7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B8E5A0FA26CE13D700B3D7A7 /* HoneymoonApp.swift */,
+				B8E5A11526CE153A00B3D7A7 /* SubViews */,
 				4E2BA89626FAB05300CAF060 /* SavedDestinations */,
 				4E2BA89526FAB04E00CAF060 /* MAIN */,
 				4E2BA89426FAB03400CAF060 /* AUTH */,
 				4E2BA89726FAB09000CAF060 /* SETTINGS */,
 			);
-			path = "VM App";
+			path = View;
 			sourceTree = "<group>";
 		};
-		B8E5A11526CE153A00B3D7A7 /* View */ = {
+		B8E5A11526CE153A00B3D7A7 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
 				4EA9668F26FFDADD00481D78 /* SavedDestinationsViews */,
 				4EA9668E26FFDAC200481D78 /* ContentView */,
 				B8E5A14426CF8CFE00B3D7A7 /* Info&Guide Views */,
 			);
-			path = View;
+			path = SubViews;
 			sourceTree = "<group>";
 		};
-		B8E5A11F26CF03F700B3D7A7 /* Model */ = {
+		B8E5A11F26CF03F700B3D7A7 /* AUTH Model */ = {
 			isa = PBXGroup;
 			children = (
-				B8E5A12326CF046200B3D7A7 /* DemoDestinations.swift */,
-				B8E5A12026CF040900B3D7A7 /* DestinationModel.swift */,
 				4EB0EB0E26F5A71800B17E85 /* UserModel.swift */,
 			);
-			path = Model;
+			path = "AUTH Model";
 			sourceTree = "<group>";
 		};
 		B8E5A14426CF8CFE00B3D7A7 /* Info&Guide Views */ = {
@@ -259,15 +272,16 @@
 			path = "Info&Guide Views";
 			sourceTree = "<group>";
 		};
-		B8E5A14826D094CE00B3D7A7 /* Utility Model */ = {
+		B8E5A14826D094CE00B3D7A7 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
 				B8E5A13526CF1DCF00B3D7A7 /* ViewModifiers.swift */,
 				B8E5A14626D0922500B3D7A7 /* CardTransition.swift */,
-				B8E5A14926D094DC00B3D7A7 /* Global and GeneralUility.swift */,
+				B8E5A14926D094DC00B3D7A7 /* Haptics Feedback.swift */,
 				4EB0EB1626F5B91F00B17E85 /* PlaceholderExtension.swift */,
+				4EA6C24C271A882000DE3316 /* AudioFXPlayer.swift */,
 			);
-			path = "Utility Model";
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		B8E5A14B26D0B66C00B3D7A7 /* Frameworks */ = {
@@ -359,7 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8E5A14A26D094DC00B3D7A7 /* Global and GeneralUility.swift in Sources */,
+				B8E5A14A26D094DC00B3D7A7 /* Haptics Feedback.swift in Sources */,
 				4EB0EB1926F88DA000B17E85 /* DestinationListView.swift in Sources */,
 				4EB0EB0F26F5A71800B17E85 /* UserModel.swift in Sources */,
 				4EB0EB1D26F9B0E100B17E85 /* DestinationGridItemView.swift in Sources */,
@@ -369,7 +383,9 @@
 				4EB0EB1326F5A80F00B17E85 /* LoginView.swift in Sources */,
 				B8E5A13326CF1B6D00B3D7A7 /* InfoView.swift in Sources */,
 				4EA9669226FFDB4600481D78 /* PackageView.swift in Sources */,
+				4EA6C250271A8CD300DE3316 /* InitFirestoreDatabase.swift in Sources */,
 				B8E5A12A26CF09C300B3D7A7 /* FooterView.swift in Sources */,
+				4EA6C24D271A882100DE3316 /* AudioFXPlayer.swift in Sources */,
 				4EB0EB1726F5B91F00B17E85 /* PlaceholderExtension.swift in Sources */,
 				B8E5A13626CF1DCF00B3D7A7 /* ViewModifiers.swift in Sources */,
 				B8E5A12826CF07CB00B3D7A7 /* HeaderView.swift in Sources */,
@@ -379,7 +395,7 @@
 				B8E5A12D26CF0C0400B3D7A7 /* HeaderComponent.swift in Sources */,
 				B883F7B026D1D94E007EC9B8 /* LikedView.swift in Sources */,
 				B8E5A14126CF272D00B3D7A7 /* LinkRowAppInfoView.swift in Sources */,
-				B8E5A12426CF046200B3D7A7 /* DemoDestinations.swift in Sources */,
+				B8E5A12426CF046200B3D7A7 /* PreviewDemoDestinations.swift in Sources */,
 				B8E5A0FB26CE13D700B3D7A7 /* HoneymoonApp.swift in Sources */,
 				B8E5A13F26CF271000B3D7A7 /* RowAppInfoView.swift in Sources */,
 				4EB0EB1126F5A80400B17E85 /* WelcomeView.swift in Sources */,

@@ -1,53 +1,15 @@
 //
-//  HoneymoonApp.swift
+//  InitFirestoreDatabase.swift
 //  Honeymoon
 //
-//  Created by Cristiano Galiano on 8/19/21.
+//  Created by  Cristiano on 16/10/21.
 //
 
-import SwiftUI
-import Firebase
+import Foundation
 
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-    @EnvironmentObject var session: SessionStore
-
-
-
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
-        Firestore.firestore()
-        return true
-    }
-}
-
-
-
-@main
-struct HoneymoonApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @EnvironmentObject var session: SessionStore
-    @AppStorage("FaceID") var faceID: Bool = false
-    @AppStorage("userEmailUserDefaults") var userEmailUserDefaults: String = ""
-    @AppStorage("passwordUserDefaults") var passwordUserDefaults: String = ""
-    @AppStorage("askFaceIDActivationRequest") var askFaceIDActivationRequest: Bool = true
+class InitFirestoreDatabase {
     
-    var body: some Scene {
-        
-        WindowGroup {
-            MainView().environmentObject(SessionStore())
-//                .onAppear {
-//                DispatchQueue.main.async {
-//                  //   COMMENTED OUT, USED ONLY THE FIRST TIME TO CREATE THE FIRESTORE DATABASE
-//                    print("==========INITIALIZING DATABASE===========")
-//                    initDataFirestore()
-//                }
-//            }
-        }
-    }
-    
-
     
     // MARK: - DATABASE INITIALIZER
     // USED ONLY THE FIRST TIME TO INITIALIZE THE DATABSE FOR DESTINATION DATA AND PROMOTIONS FOR THIS DEMO APP
@@ -85,7 +47,4 @@ struct HoneymoonApp: App {
             
         }
     }
-    
-    
-    
 }

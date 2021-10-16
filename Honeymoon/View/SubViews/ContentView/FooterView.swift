@@ -30,7 +30,7 @@ struct FooterView: View {
                 
                 Spacer()
                 Button {
-                    playSound(file: "sound-click", type: "mp3")
+                    audioFXPlayer.playSoundClick()
                     feedback.notificationOccurred(.success)
                     showBookingAlert.toggle()
                 } label: {

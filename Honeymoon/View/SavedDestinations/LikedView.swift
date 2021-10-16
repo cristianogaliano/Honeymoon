@@ -12,6 +12,7 @@ struct LikedView: View {
     @EnvironmentObject var session: SessionStore
     var savedPreferences: [String: [String : Bool]]
     var destinations: [Destination]
+    var like: Bool
 
     //GRID LAYOUT
     @State private var isGridViewActive: Bool = false
@@ -40,16 +41,15 @@ struct LikedView: View {
             if !isGridViewActive {
                 List {
                     ForEach(destinations, id: \.id) { destination in
-                        if savedPreferences[destination.place]?["like"] == true {
-                            NavigationLink(
-                                    destination: DestinationPromotionsView(destination: destination),
-                                    label: {
-                                        DestinationListView(like: true, destination: destination)
-                                    })
-                        }
-
-                    }
-                }
+                            if savedPreferences[destination.place]?["like"] == like {
+                                NavigationLink(
+                                        destination: DestinationPromotionsView(destination: destination),
+                                        label: {
+                                            DestinationListView(like: like, destination: destination)
+                                        })
+                            }
+                    }//LOOP FOREACH
+                }//LIST
             } else {
                 EmptyView()
                 ScrollView {
