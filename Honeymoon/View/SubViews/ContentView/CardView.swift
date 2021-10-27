@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardView: View, Identifiable {
     let id = UUID()
-    var destination: Destination
+    var destination: DestinationProtocol
     
     var body: some View {
         
@@ -64,7 +64,7 @@ struct CardView: View, Identifiable {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(destination: demoDestinations[0])
+        CardView(destination: DestinationsData[0])
             .previewLayout(.fixed(width: 375, height: 600))
     }
 }

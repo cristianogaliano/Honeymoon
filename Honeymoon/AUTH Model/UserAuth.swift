@@ -1,5 +1,4 @@
 
-import UIKit
 import SwiftUI
 import Firebase
 import Combine
@@ -7,30 +6,29 @@ import Combine
 
 
 
-class SessionStore: ObservableObject {
-
+class UserAuth: ObservableObject {
+    public static let shared = UserAuth()
     
-    var didChange = PassthroughSubject<SessionStore, Never>()
+    var didChange = PassthroughSubject<UserAuth, Never>()
     var handle: AuthStateDidChangeListenerHandle?
-    @Published var session: User? { didSet { self.didChange.send(self) }}
+    @Published var user: User? { didSet { self.didChange.send(self) }}
     @Published var userPresent: Bool = false
     @Published var errorMessage: String = ""
-    @Published var savedPreferences: [String: [String : Bool]] = [:]
 
     
     func listen () {
         // monitor authentication changes using firebase
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            if let user = user {
+            if let safeUser = user {
                 // if we have a user, create a new user model
-                self.session = User(
-                    uid: user.uid,
-                    email: user.email
+                self.user = User(
+                    uid: safeUser.uid,
+                    email: safeUser.email
                 )
-                print("Listening: \(user.email ?? "Unknown")")
+                print("Listening: \(safeUser.email ?? "Unknown")")
             } else {
                 // if we don't have a user, set our session to nil
-                self.session = nil
+                self.user = nil
                 self.userPresent = false
                 print("No Got user to listen")
             }
@@ -57,7 +55,7 @@ class SessionStore: ObservableObject {
         do {
             print("SIGN OUT")
             try Auth.auth().signOut()
-            self.session = nil
+            self.user = nil
             return false
         } catch {
             return true

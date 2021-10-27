@@ -7,14 +7,16 @@ struct RegisterView: View {
     //REGISTER
     @State private var username: String = ""
     @State private var password: String = ""
-    @State private var errorSignup: Bool = false
     @State private var emailSent: Bool = false
     @State private var animation: Bool = false
     @State private var isSecured: Bool = true
     
+    //ERROR
+    @State private var showErrorAlert: Bool = false
+    @State private var errorMessage: String = ""
     
     //USER
-    @EnvironmentObject var session: SessionStore
+    @ObservedObject var user = UserAuth.shared
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
@@ -22,12 +24,12 @@ struct RegisterView: View {
     // MARK: - SIGNUP METHOD
     //SignUp with mandatory email verification. Will be requested to login after the email is verified.
     func signUp() {
-        session.signUp(email: username, password: password) { result, error in
+        user.signUp(email: username, password: password) { result, error in
             
             if error != nil {
                 //SHOW ALERT WITH ERROR
-                session.errorMessage = error?.localizedDescription ?? "Unkown Error"
-                errorSignup.toggle()
+                errorMessage = error?.localizedDescription ?? "Unkown Error"
+                showErrorAlert.toggle()
                 //                }
             } else {
                 //NO ERROR
@@ -38,14 +40,14 @@ struct RegisterView: View {
                     result?.user.sendEmailVerification(completion: { error in
                         if error != nil {
                             print("ERROR, IN SENDING VERIFICATION EMAIL!")
-                            session.errorMessage = error?.localizedDescription ?? "Unkown Error"
-                            errorSignup.toggle()
+                            errorMessage = error?.localizedDescription ?? "Unkown Error"
+                            showErrorAlert.toggle()
                             return
                         } else {
                             print("VERIFICATION EMAIL SENT!")
                             emailSent = true
-                            session.errorMessage = "We have just sent you a verification email, please verify your details and logIn to Honeymoon and start browsing your nect destination!"
-                            errorSignup.toggle()
+                            errorMessage = "We have just sent you a verification email, please verify your details and logIn to Honeymoon and start browsing your nect destination!"
+                            showErrorAlert.toggle()
                         }
                     })
                 } else {
@@ -54,7 +56,6 @@ struct RegisterView: View {
                 
             }
         }
-        
     }
     
     var body: some View {
@@ -135,7 +136,7 @@ struct RegisterView: View {
                 }
             }//PASSWORD VSTACK
             
-            // MARK: - REFISTER BUTTON
+            // MARK: - REGISTER BUTTON
             Button(action: {
                 signUp()
                 feedback.notificationOccurred(.success)
@@ -148,11 +149,16 @@ struct RegisterView: View {
         }//VSTACK
         .onAppear(perform: {withAnimation(.easeOut(duration: 1)) {animation.toggle()}})
         .background(Image("background"))
+        
+    
+        
+        
+        // MARK: - ALERTS
         //ALERT for eventual errors, used also as notification for VerificationEmailSent and if so, opens LoginView
-        .alert(isPresented: $errorSignup) {
+        .alert(isPresented: $showErrorAlert) {
             Alert(
                 title: Text(emailSent ? "VERIFICATION EMAIL SENT!" : "Error"),
-                message: Text(session.errorMessage),
+                message: Text(errorMessage),
                 dismissButton: .default(Text("OK"), action: {
                     if emailSent {
                         presentationMode.wrappedValue.dismiss()

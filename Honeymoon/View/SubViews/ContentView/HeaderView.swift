@@ -9,15 +9,15 @@ import SwiftUI
 
 struct HeaderView: View {
     @Binding var showSettings: Bool
-    @EnvironmentObject var session: SessionStore
-    
+    @ObservedObject var user = UserAuth.shared
+
     
     var body: some View {
         
         VStack {
             HStack {
                 Button {
-                   _ = session.signOut()
+                   _ = user.signOut()
                     audioFXPlayer.playSoundClick()
                     feedback.notificationOccurred(.warning)
                 } label: {

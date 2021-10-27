@@ -10,23 +10,27 @@ import Firebase
 import LocalAuthentication
 
 struct MainView: View {
-    
-    @EnvironmentObject var session: SessionStore
-    @AppStorage("FaceID") var faceID: Bool = false
+    //FIREBASE
+    @ObservedObject var user = UserAuth.shared
+    @EnvironmentObject var dataSource: DataSource
+
+    //FACEID
+    @AppStorage("faceIDIsOn") var faceIDIsOn: Bool = false
     @AppStorage("userEmailUserDefaults") var userEmailUserDefaults: String = ""
     @AppStorage("passwordUserDefaults") var passwordUserDefaults: String = ""
     
-    
+    //ERROR
+    @State private var errorMessage: String = ""
     @State private var showErrorAlert: Bool = false
     
     
     var body: some View {
         NavigationView {
-            if session.userPresent {
+            if user.userPresent {
                 ContentView()
                     .onAppear {
                         DispatchQueue.main.async {
-                            fetchDestinationsPreferences()
+                            dataSource.getDestinationsPreferences()
                         }
                     }
             } else {
@@ -36,12 +40,18 @@ struct MainView: View {
         }
         .accentColor(.white)
         .onAppear(perform: {
-            if faceID {
-                authenticateWithFaceID()
-            }
-            session.listen()
-            fetchDestinationsData()
+//            if faceIDIsOn {
+//                faceID.authenticateWithFaceID()
+//                if faceID.recognized {
+//                    print("YEEEESSS")
+//                } else {
+//                    print("NOOOPE")
+//                }
+//            }
+            user.listen()
         })
+        
+        //ERROR ALERT
         .alert("Error", isPresented: $showErrorAlert,
                actions: {
             Button {
@@ -50,12 +60,11 @@ struct MainView: View {
                 Text("OK")
             }
         }, message: {
-            Text(session.errorMessage)
-        })//ALERT FACEID ACTIVATION REQUEST
+            Text(errorMessage)
+        })//ERROR ALERT
+        
         .navigationBarHidden(true)
     }
-    
-    // MARK: - METHODS
     
     
     
@@ -92,19 +101,19 @@ struct MainView: View {
     }
     
     func signInWithFaceID(username: String, password: String) {
-        session.signIn(email: username, password: password) { result, error in
+        user.signIn(email: username, password: password) { result, error in
             if error != nil {
                 //Wrong credentials in the userdefaults
-                session.errorMessage = "Username and passwod in archive for FaceID results not matching with your registered logIN. Please logIn manually without FaceID, \(String(describing: error?.localizedDescription))"
+                user.errorMessage = "Username and passwod in archive for FaceID results not matching with your registered logIN. Please logIn manually without FaceID, \(String(describing: error?.localizedDescription))"
                 showErrorAlert.toggle()
             } else {
                 //UserEmail not verified, bounce back the login
                 if !result!.user.isEmailVerified {
-                    session.errorMessage = "Please verify your email."
+                    user.errorMessage = "Please verify your email."
                     showErrorAlert.toggle()
                 } else {
                     print("LOGIN SUCCESS!")
-                    session.userPresent = true
+                    user.userPresent = true
                 }
             }
         }
@@ -115,75 +124,6 @@ struct MainView: View {
     
     
     
-    // MARK: - FETCH PREFERENCES
-    func fetchDestinationsPreferences() {
-        if let userEmail = session.session?.email {
-            
-            _ = db.collection("Users").document(userEmail).collection("PlacePreferences").addSnapshotListener({ querySnapshot, error in
-                guard let preferences = querySnapshot?.documents else {
-                    print("Error fetching preferences: \(error!)")
-                    return
-                }
-                for preference in preferences {
-                    self.session.savedPreferences[preference["place"] as! String] = ["like" : (preference["like"] as! Bool)]
-                }
-                
-                
-                
-            })//ADD LISTENER
-            
-        }// IF LET USEREMAIL
-    }
-    
-    
-    
-    
-    // MARK: - FETCH DESTINATIONS
-    func fetchDestinationsData() {
-        
-        var promotionArray = [Promotion]()
-        
-        db.collection("DestinationsDATA").getDocuments { querysnapshot, error in
-            guard let destinations = querysnapshot?.documents else {
-                print("Error fetching documents: \(error!)")
-                return
-            }
-            
-            
-            
-            for destination in destinations {
-                destination.reference.collection("Promotions").getDocuments { promotionQueySnapshot, promError in
-                    guard let promotions = promotionQueySnapshot?.documents else {
-                        print("Error fetching promotions: \(promError!)")
-                        return
-                    }
-                    
-                    promotionArray = [Promotion]()
-                    for promotion in promotions {
-                        promotionArray.append(Promotion(
-                            title: promotion["title"] as! String,
-                            description: promotion["description"] as! String,
-                            price: promotion["price"] as! String,
-                            image: promotion["image"] as! String))}
-                    
-                    destinationsArray.append(Destination(
-                        id: destination["id"] as! String,
-                        place: destination["place"] as! String,
-                        country: destination["country"] as! String,
-                        image: destination["image"] as! String,
-                        promotionFrom: destination["promotionFrom"] as! String,
-                        promotions: promotionArray))
-                    
-                    
-                    
-                }// Promotions GETDOCUMENTS
-            }//DESTINATION LOOP
-            
-            
-        }//DESTINATIONS GETDOCUMENTS
-        
-        
-    }//func
     
     
     
@@ -191,6 +131,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView().environmentObject(SessionStore())
+        MainView().environmentObject(UserAuth())
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FooterView: View {
-    @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var dataSource: DataSource
     @Binding var showBookingAlert: Bool
 
 
@@ -20,7 +20,7 @@ struct FooterView: View {
  
             HStack {
                 NavigationLink(
-                    destination: DislikedView(savedPreferences: session.savedPreferences, destinations: destinationsArray),
+                    destination: LikedView(savedPreferences: dataSource.savedPreferences, destinations: destinationsGlobal, like: false),
                     label: {
                         Image(systemName: "xmark.circle")
                             .foregroundColor(.pink)
@@ -43,7 +43,7 @@ struct FooterView: View {
                 
                 Spacer()
                 NavigationLink(
-                    destination: LikedView(savedPreferences: session.savedPreferences, destinations: destinationsArray),
+                    destination: LikedView(savedPreferences: dataSource.savedPreferences, destinations: destinationsGlobal, like: true),
                     label: {
                         Image(systemName: "heart.circle")
                             .foregroundColor(.pink)
@@ -76,7 +76,7 @@ struct FooterView_Previews: PreviewProvider {
     @State static var placeholder: Bool = false
 
     static var previews: some View {
-        FooterView(showBookingAlert: $placeholder).environmentObject(SessionStore())
+        FooterView(showBookingAlert: $placeholder).environmentObject(UserAuth())
             .previewLayout(.sizeThatFits)
             .padding()
     }

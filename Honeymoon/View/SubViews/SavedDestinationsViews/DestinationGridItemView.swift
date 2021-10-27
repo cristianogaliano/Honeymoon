@@ -3,9 +3,8 @@
 import SwiftUI
 
 struct DestinationGridItemView: View {
-    @EnvironmentObject var session: SessionStore
     let like: Bool
-    let destination: Destination
+    let destination: DestinationProtocol
     let columns: Int
     let city: String
     let country: String
@@ -100,10 +99,10 @@ struct DestinationGridItemView_Previews: PreviewProvider {
     
     
     static var previews: some View {
-        DestinationGridItemView(like: true, destination: demoDestinations[0], columns: 1, city: "veligandu", country: "Maldives")
+        DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 1, city: "veligandu", country: "Maldives")
             .previewLayout(.sizeThatFits)
             .padding()
-        DestinationGridItemView(like: false, destination: demoDestinations[1], columns: 1, city: "veligandu", country: "Maldives")
+        DestinationGridItemView(like: false, destination: DestinationsData[1], columns: 1, city: "veligandu", country: "Maldives")
             .previewLayout(.sizeThatFits)
             .padding()
     }

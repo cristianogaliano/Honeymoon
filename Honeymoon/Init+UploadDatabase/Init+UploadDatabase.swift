@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Firebase
 
 class InitFirestoreDatabase {
     
@@ -15,7 +15,9 @@ class InitFirestoreDatabase {
     // USED ONLY THE FIRST TIME TO INITIALIZE THE DATABSE FOR DESTINATION DATA AND PROMOTIONS FOR THIS DEMO APP
     // IN FUTURE THE ADMIN USE WILL BE ABLE TO UPDATE AND UPLOAD DATA TO FIRESTORE REGARDS PROMOTIONS AND PRICES THROUGH A SPECIFIC AREA IN THE APP USING THIS SAME METHOD, ADJUSTED TO THE ADMIN UI
     func initDataFirestore() {
-        for destination in demoDestinations {
+        let db = Firestore.firestore()
+
+        for destination in DestinationsData {
             let id = UUID().uuidString
             let place = destination.place
             let country = destination.country

@@ -7,10 +7,9 @@
 
 import SwiftUI
 import Firebase
-
+import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    @EnvironmentObject var session: SessionStore
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
@@ -24,16 +23,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct HoneymoonApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @EnvironmentObject var session: SessionStore
-    @AppStorage("FaceID") var faceID: Bool = false
+    @AppStorage("faceIDIsOn") var faceIDIsOn: Bool = false
     @AppStorage("userEmailUserDefaults") var userEmailUserDefaults: String = ""
     @AppStorage("passwordUserDefaults") var passwordUserDefaults: String = ""
     @AppStorage("askFaceIDActivationRequest") var askFaceIDActivationRequest: Bool = true
+
     let databaseInitializer = InitFirestoreDatabase()
+    @StateObject var dataSource = DataSource()
+
+    
     var body: some Scene {
         
         WindowGroup {
-            MainView().environmentObject(SessionStore())
+            MainView()
+                .environmentObject(UserAuth())
+                .environmentObject(dataSource)
             
             //                  // =============================================================================
             //                  //   COMMENTED OUT, USED ONLY THE FIRST TIME TO CREATE THE FIRESTORE DATABASE
