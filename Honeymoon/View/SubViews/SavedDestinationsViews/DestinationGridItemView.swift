@@ -99,11 +99,43 @@ struct DestinationGridItemView_Previews: PreviewProvider {
     
     
     static var previews: some View {
+        //PREVIEW 1 PIC LIKE
         DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 1, city: "veligandu", country: "Maldives")
-            .previewLayout(.sizeThatFits)
             .padding()
+        
+        //PREVIEW 2 PIC LIKE
+        Group {
+            EmptyView()
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 10) {
+                    DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 2, city: "veligandu", country: "Maldives")
+                    DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 2, city: "veligandu", country: "Maldives")
+                    DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 2, city: "veligandu", country: "Maldives")
+                    DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 2, city: "veligandu", country: "Maldives")
+                }//GRID
+                .padding(10)
+            }// SCROLL
+            EmptyView()
+        }
+        
+        //PREVIEW 3 PIC LIKE
+        Group {
+            EmptyView()
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], alignment: .center, spacing: 10) {
+                    DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 3, city: "veligandu", country: "Maldives")
+                    DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 3, city: "veligandu", country: "Maldives")
+                    DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 3, city: "veligandu", country: "Maldives")
+                    DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 3, city: "veligandu", country: "Maldives")
+                    DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 3, city: "veligandu", country: "Maldives")
+                    DestinationGridItemView(like: true, destination: DestinationsData[0], columns: 3, city: "veligandu", country: "Maldives")
+                }//GRID
+                .padding(10)
+            }// SCROLL
+            EmptyView()
+        }
+        //PREVIEW 1 PIC NO LIKE
         DestinationGridItemView(like: false, destination: DestinationsData[1], columns: 1, city: "veligandu", country: "Maldives")
-            .previewLayout(.sizeThatFits)
             .padding()
     }
 }

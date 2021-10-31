@@ -8,7 +8,6 @@ import Foundation
 
 
 class DataReader: ObservableObject {
-    @Published var destinations: [DestinationProtocol] = []
     @Published var savedPreferences: [String: [String : Bool]] = [:]
     
     func prepare() {

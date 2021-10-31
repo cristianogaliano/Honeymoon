@@ -13,7 +13,6 @@ class UserAuth: ObservableObject {
     var handle: AuthStateDidChangeListenerHandle?
     @Published var user: User? { didSet { self.didChange.send(self) }}
     @Published var userPresent: Bool = false
-    @Published var errorMessage: String = ""
 
     
     func listen () {

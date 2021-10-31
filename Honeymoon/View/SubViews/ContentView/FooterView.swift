@@ -76,7 +76,8 @@ struct FooterView_Previews: PreviewProvider {
     @State static var placeholder: Bool = false
 
     static var previews: some View {
-        FooterView(showBookingAlert: $placeholder).environmentObject(UserAuth())
+        FooterView(showBookingAlert: $placeholder)
+            .environmentObject(DataSource())
             .previewLayout(.sizeThatFits)
             .padding()
     }

@@ -9,9 +9,8 @@ import SwiftUI
 import Firebase
 
 struct ContentView: View {
-    //FIREBASE
+    //ENVIRONMENT
     @EnvironmentObject var dataSource: DataSource
-
 
     
     // MARK: - BINDING SHEETS
@@ -46,9 +45,9 @@ struct ContentView: View {
         cardViews.append(newCardView)
     }
     
+    
     private func isTopCard(cardView: CardView) -> Bool {
         guard let index = cardViews.firstIndex(where: { $0.id == cardView.id}) else { return false }
-        
         return index == 0
     }
     
@@ -109,7 +108,6 @@ struct ContentView: View {
             
             Spacer()
 
-            
             //MARK: - CARDS
             ZStack {
                 ForEach(cardViews) { cardView in
@@ -197,11 +195,6 @@ struct ContentView: View {
         }//ALERT
         
         
-        // MARK: - ON APPEAR PERFORM
-        .onAppear(perform: {
-
-        })//ON APPEAR
-        
     }//BODY
     
     
@@ -212,8 +205,12 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+
+    
     static var previews: some View {
-        ContentView().environmentObject(DataSource())
+        
+        ContentView()
+            .environmentObject(DataSource())
 
     }
 }

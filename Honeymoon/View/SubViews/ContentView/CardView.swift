@@ -65,6 +65,7 @@ struct CardView: View, Identifiable {
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
         CardView(destination: DestinationsData[0])
-            .previewLayout(.fixed(width: 375, height: 600))
+            .previewLayout(.sizeThatFits)
+            .padding()
     }
 }

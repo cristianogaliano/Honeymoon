@@ -28,7 +28,12 @@ struct HoneymoonApp: App {
     @AppStorage("passwordUserDefaults") var passwordUserDefaults: String = ""
     @AppStorage("askFaceIDActivationRequest") var askFaceIDActivationRequest: Bool = true
 
-    let databaseInitializer = InitFirestoreDatabase()
+    
+//                  // =============================================================================
+//                  //   COMMENTED OUT, USED ONLY THE FIRST TIME TO CREATE THE FIRESTORE DATABASE
+//    let databaseInitializer = InitFirestoreDatabase()
+    
+    
     @StateObject var dataSource = DataSource()
 
     
@@ -36,7 +41,6 @@ struct HoneymoonApp: App {
         
         WindowGroup {
             MainView()
-                .environmentObject(UserAuth())
                 .environmentObject(dataSource)
             
             //                  // =============================================================================

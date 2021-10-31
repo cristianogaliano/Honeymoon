@@ -14,7 +14,6 @@
 		4EA6C252271A940500DE3316 /* FaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA6C251271A940500DE3316 /* FaceID.swift */; };
 		4EA6C254271B7E3500DE3316 /* DestinationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA6C253271B7E3500DE3316 /* DestinationProtocol.swift */; };
 		4EA6C257271D89AE00DE3316 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA6C256271D89AE00DE3316 /* DataSource.swift */; };
-		4EA6C259271EBEC900DE3316 /* LoggingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA6C258271EBEC900DE3316 /* LoggingProtocol.swift */; };
 		4EA6C25B271FE0D300DE3316 /* DataReaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA6C25A271FE0D300DE3316 /* DataReaderProtocol.swift */; };
 		4EA6C25D271FE36A00DE3316 /* SavePreferenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA6C25C271FE36A00DE3316 /* SavePreferenceProtocol.swift */; };
 		4EA9669226FFDB4600481D78 /* PackageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA9669126FFDB4600481D78 /* PackageView.swift */; };
@@ -22,7 +21,7 @@
 		4EB0EB0826F56D8B00B17E85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EB0EB0726F56D8B00B17E85 /* GoogleService-Info.plist */; };
 		4EB0EB0B26F595D300B17E85 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4EB0EB0A26F595D300B17E85 /* FirebaseAuth */; };
 		4EB0EB0D26F595D300B17E85 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4EB0EB0C26F595D300B17E85 /* FirebaseFirestore */; };
-		4EB0EB0F26F5A71800B17E85 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB0EB0E26F5A71800B17E85 /* UserAuth.swift */; };
+		4EB0EB0F26F5A71800B17E85 /* UserAuthFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB0EB0E26F5A71800B17E85 /* UserAuthFirebase.swift */; };
 		4EB0EB1126F5A80400B17E85 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB0EB1026F5A80400B17E85 /* WelcomeView.swift */; };
 		4EB0EB1326F5A80F00B17E85 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB0EB1226F5A80F00B17E85 /* LoginView.swift */; };
 		4EB0EB1526F5A81A00B17E85 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB0EB1426F5A81A00B17E85 /* RegisterView.swift */; };
@@ -63,14 +62,13 @@
 		4EA6C251271A940500DE3316 /* FaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceID.swift; sourceTree = "<group>"; };
 		4EA6C253271B7E3500DE3316 /* DestinationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationProtocol.swift; sourceTree = "<group>"; };
 		4EA6C256271D89AE00DE3316 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
-		4EA6C258271EBEC900DE3316 /* LoggingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingProtocol.swift; sourceTree = "<group>"; };
 		4EA6C25A271FE0D300DE3316 /* DataReaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataReaderProtocol.swift; sourceTree = "<group>"; };
 		4EA6C25C271FE36A00DE3316 /* SavePreferenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePreferenceProtocol.swift; sourceTree = "<group>"; };
 		4EA9669126FFDB4600481D78 /* PackageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageView.swift; sourceTree = "<group>"; };
 		4EA9669426FFF56100481D78 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4EB0EAFD26F46F0900B17E85 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4EB0EB0726F56D8B00B17E85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4EB0EB0E26F5A71800B17E85 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
+		4EB0EB0E26F5A71800B17E85 /* UserAuthFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthFirebase.swift; sourceTree = "<group>"; };
 		4EB0EB1026F5A80400B17E85 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		4EB0EB1226F5A80F00B17E85 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4EB0EB1426F5A81A00B17E85 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				4EA6C253271B7E3500DE3316 /* DestinationProtocol.swift */,
-				4EA6C258271EBEC900DE3316 /* LoggingProtocol.swift */,
 				4EA6C25A271FE0D300DE3316 /* DataReaderProtocol.swift */,
 				4EA6C25C271FE36A00DE3316 /* SavePreferenceProtocol.swift */,
 			);
@@ -229,7 +226,7 @@
 				B8E5A0FA26CE13D700B3D7A7 /* HoneymoonApp.swift */,
 				4E999DDE2725E4E0004EC2F3 /* Init+UploadDatabase */,
 				4EA6C255271B7ED400DE3316 /* Protocols */,
-				B8E5A11F26CF03F700B3D7A7 /* AUTH Model */,
+				B8E5A11F26CF03F700B3D7A7 /* AUTH Model - Singletons */,
 				4EA6C24E271A8A3400DE3316 /* Data */,
 				B8E5A14826D094CE00B3D7A7 /* Utility */,
 				B8E5A11426CE153500B3D7A7 /* View */,
@@ -281,13 +278,13 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
-		B8E5A11F26CF03F700B3D7A7 /* AUTH Model */ = {
+		B8E5A11F26CF03F700B3D7A7 /* AUTH Model - Singletons */ = {
 			isa = PBXGroup;
 			children = (
-				4EB0EB0E26F5A71800B17E85 /* UserAuth.swift */,
+				4EB0EB0E26F5A71800B17E85 /* UserAuthFirebase.swift */,
 				4EA6C251271A940500DE3316 /* FaceID.swift */,
 			);
-			path = "AUTH Model";
+			path = "AUTH Model - Singletons";
 			sourceTree = "<group>";
 		};
 		B8E5A14426CF8CFE00B3D7A7 /* Info&Guide Views */ = {
@@ -406,7 +403,7 @@
 			files = (
 				B8E5A14A26D094DC00B3D7A7 /* Haptics Feedback.swift in Sources */,
 				4EB0EB1926F88DA000B17E85 /* DestinationListView.swift in Sources */,
-				4EB0EB0F26F5A71800B17E85 /* UserAuth.swift in Sources */,
+				4EB0EB0F26F5A71800B17E85 /* UserAuthFirebase.swift in Sources */,
 				4EB0EB1D26F9B0E100B17E85 /* DestinationGridItemView.swift in Sources */,
 				4EB0EB1B26F88F5600B17E85 /* DestinationPromotionsView.swift in Sources */,
 				B8E5A12126CF040900B3D7A7 /* DestinationModel+Protocol.swift in Sources */,
@@ -433,7 +430,6 @@
 				4EB0EB1126F5A80400B17E85 /* WelcomeView.swift in Sources */,
 				4EA6C25B271FE0D300DE3316 /* DataReaderProtocol.swift in Sources */,
 				B8E5A13D26CF26C800B3D7A7 /* AppInfoView.swift in Sources */,
-				4EA6C259271EBEC900DE3316 /* LoggingProtocol.swift in Sources */,
 				B8E5A12626CF04FC00B3D7A7 /* CardView.swift in Sources */,
 				4E2BA89126FAA11600CAF060 /* MainView.swift in Sources */,
 				4EB0EB1526F5A81A00B17E85 /* RegisterView.swift in Sources */,
@@ -585,6 +581,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -620,6 +617,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

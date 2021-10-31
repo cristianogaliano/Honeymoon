@@ -9,13 +9,10 @@ import SwiftUI
 import LocalAuthentication
 
 
-let faceID = FaceID()
-
-class FaceID {
-    
-    @Published var recognized: Bool = false
-    
-    func authenticateWithFaceID() {
+class FaceID: ObservableObject {
+    public static let shared = FaceID()
+        
+    func authenticateWithFaceID(completionSignIn: ()) {
         let context = LAContext()
         var error: NSError?
         // check whether biometric authentication is possible
@@ -26,10 +23,12 @@ class FaceID {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                 // authentication has now completed
                 DispatchQueue.main.async {
-                    self.recognized = success
+                    print("FaceID .success is \(success.description)")
                     if success {
+                        completionSignIn
                         // user recognized
                         print("FaceID RECOGNIZED!!!")
+
                     } else {
                         // there was a problem to recognize the user face or fingerprint
                         print("FaceD NOT RECOGNIZED!!!")
@@ -43,6 +42,7 @@ class FaceID {
         }
     }
 }
+
 
 
 
