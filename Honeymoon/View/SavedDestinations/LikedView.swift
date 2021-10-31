@@ -9,9 +9,8 @@ import SwiftUI
 import Firebase
 
 struct LikedView: View {
-    @EnvironmentObject var session: SessionStore
     var savedPreferences: [String: [String : Bool]]
-    var destinations: [Destination]
+    var destinations: [DestinationProtocol]
     var like: Bool
 
     //GRID LAYOUT
@@ -55,11 +54,11 @@ struct LikedView: View {
                 ScrollView {
                     LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
                         ForEach(destinations, id: \.id) { destination in
-                            if savedPreferences[destination.place]?["like"] == true {
+                            if savedPreferences[destination.place]?["like"] == like {
                                 NavigationLink(
                                     destination: DestinationPromotionsView(destination: destination),
                                     label: {
-                                        DestinationGridItemView(like: true, destination: destination, columns: gridColumn, city: destination.place, country: destination.country)
+                                        DestinationGridItemView(like: like, destination: destination, columns: gridColumn, city: destination.place, country: destination.country)
                                     })
                             }
                         }
@@ -72,7 +71,7 @@ struct LikedView: View {
             }
     
         }//GROUP
-        .navigationTitle(Text("❤️I LIKED..."))
+        .navigationTitle(like ? Text("❤️I LIKED...") : Text("❌ I DID NOT LIKE..."))
         .animation(Animation.easeIn, value: isGridViewActive)
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -109,7 +108,8 @@ struct LikedView_Previews: PreviewProvider {
     static let demoPreferences: [String : [String : Bool]] = ["Budapest": ["like": true], "Venice": ["like": false], "Seoraksan": ["like": false], "Rio de Janeiro": ["like": false], "Athens": ["like": true], "Tulum": ["like": true], "Paris": ["like": true], "Sydney": ["like": false], "High Tatras": ["like": true], "Emerald Lake": ["like": true], "Yosemite": ["like": true], "Lake Bled": ["like": true], "Krabi": ["like": true], "Grand Canyon": ["like": false], "Dubai": ["like": true], "Barcelona": ["like": false], "San Francisco": ["like": false], "London": ["like": false], "Rome": ["like": true], "New York": ["like": true], "Veligandu": ["like": false]]
     static var previews: some View {
         
-        LikedView(savedPreferences: demoPreferences, destinations: demoDestinations)
-            .environmentObject(SessionStore())
+        LikedView(savedPreferences: demoPreferences, destinations: DestinationsData, like: true)
+        
+        LikedView(savedPreferences: demoPreferences, destinations: DestinationsData, like: false)
     }
 }

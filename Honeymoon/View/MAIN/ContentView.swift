@@ -9,12 +9,12 @@ import SwiftUI
 import Firebase
 
 struct ContentView: View {
-    //FIREBASE
-    @EnvironmentObject var session: SessionStore
+    //ENVIRONMENT
+    @EnvironmentObject var dataSource: DataSource
 
     
-    
     // MARK: - BINDING SHEETS
+    @State private var errorMessage: String = ""
     @State private var showAlert: Bool = false
     @State private var showSettings: Bool = false
     @State private var showInfo: Bool = false
@@ -28,25 +28,26 @@ struct ContentView: View {
     @State private var cardViews: [CardView] = {
         var views = [CardView]()
         for i in 0..<2 {
-            views.append(CardView(destination: destinationsArray[i]))
+            views.append(CardView(destination: destinationsGlobal[i]))
         }
         return views
     }()
     
-        
+    
+
 
     
     private func moveCards() {
         cardViews.removeFirst()
         lastCardIndex += 1
-        let nextCard = destinationsArray[lastCardIndex % destinationsArray.count]
+        let nextCard = destinationsGlobal[lastCardIndex % destinationsGlobal.count]
         let newCardView = CardView(destination: nextCard)
         cardViews.append(newCardView)
     }
     
+    
     private func isTopCard(cardView: CardView) -> Bool {
         guard let index = cardViews.firstIndex(where: { $0.id == cardView.id}) else { return false }
-        
         return index == 0
     }
     
@@ -89,23 +90,6 @@ struct ContentView: View {
         
     }
         
-    // MARK: - SAVE PREFERENCE
-    func savePreference(of card: CardView, like: Bool) {
-        // MARK: - SAVE/UPDATE FIRESTORE
-        
-        if let userEmail = session.session?.email {
-            let id = UUID().uuidString
-            let place = card.destination.place
-            let userData = db.collection("Users").document(userEmail).collection("PlacePreferences").document(place)
-            userData.setData(["place" : place, "like" : like, "id" : id])
-        } else {
-            self.errorShowing = true
-            self.session.errorMessage = "CAN'T SAVE THE ITEM IN FIRESTORE"
-            return
-        }
-        
-    }
-
     
     
     
@@ -124,7 +108,6 @@ struct ContentView: View {
             
             Spacer()
 
-            
             //MARK: - CARDS
             ZStack {
                 ForEach(cardViews) { cardView in
@@ -179,13 +162,13 @@ struct ContentView: View {
                                     if drag.translation.width < -dragAreaThreshold {
                                         audioFXPlayer.playSoundClick()
                                         haptic.impactOccurred()
-                                        savePreference(of: cardView, like: false)
+                                        dataSource.savePreference(of: cardView, like: false)
                                         moveCards()
                                     }
                                     if drag.translation.width > dragAreaThreshold {
                                         audioFXPlayer.playSoundRise()
                                         feedback.notificationOccurred(.success)
-                                        savePreference(of: cardView, like: true)
+                                        dataSource.savePreference(of: cardView, like: true)
                                         moveCards()
                                     }
                                 })//ON ENDED
@@ -208,21 +191,13 @@ struct ContentView: View {
         }//VSTACK
         .navigationBarHidden(true)
         .alert(isPresented: $errorShowing) {
-            Alert(title: Text("Error"), message: Text(session.errorMessage), dismissButton: .default(Text("OK")))
+            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
         }//ALERT
         
-        
-        // MARK: - ON APPEAR PERFORM
-        .onAppear(perform: {
-
-        })//ON APPEAR
         
     }//BODY
     
     
-    // MARK: - METHODS
-
-
 
     
     
@@ -230,8 +205,12 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+
+    
     static var previews: some View {
-        ContentView().environmentObject(SessionStore())
         
+        ContentView()
+            .environmentObject(DataSource())
+
     }
 }

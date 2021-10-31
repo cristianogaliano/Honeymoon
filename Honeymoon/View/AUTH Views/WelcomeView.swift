@@ -3,7 +3,6 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @EnvironmentObject var session: SessionStore
     
     @State var isShowingLogin: Bool = false
     @State var isShowingRegister: Bool = false
@@ -54,6 +53,6 @@ struct WelcomeView: View {
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView().environmentObject(SessionStore())
+        WelcomeView()
     }
 }

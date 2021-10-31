@@ -6,7 +6,7 @@ import LocalAuthentication
 struct LoginView: View {
     
     //FACEID
-    @AppStorage("FaceID") var faceID: Bool = false
+    @AppStorage("faceIDIsOn") var faceIDIsOn: Bool = false
     @AppStorage("userEmailUserDefaults") var userEmailUserDefaults: String = ""
     @AppStorage("passwordUserDefaults") var passwordUserDefaults: String = ""
     @AppStorage("askFaceIDActivationRequest") var askFaceIDActivationRequest: Bool = true
@@ -14,26 +14,28 @@ struct LoginView: View {
     @State private var showFaceIDAskAgainRequest: Bool = false
     let laContect = LAContext()
     
+    //ERROR
+    @State private var errorMessage: String = ""
+    @State private var showErrorAlert: Bool = false
+    
     //LOGIN
     @State private var username: String = "cristianogaliano88@gmail.com"
     @State private var password: String = "123456"
-    @State private var errorSignIn: Bool = false
     @State private var loginAttempt: Int = 0
     @State private var animation: Bool = false
     @State private var isSecured: Bool = true
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
-    
     //USER
-    @EnvironmentObject var session: SessionStore
+    @ObservedObject var user = UserAuth.shared
+
     
     
     // MARK: - LOGIN METHOD
     func signIn() {
-        //login with email and password entered in the UI
-        session.signIn(email: username, password: password) { result, error in
-           //if we have a problem
+        user.signIn(email: username, password: password) { result, error in
+            //if we have a problem
             if error != nil {
                 //if the problem is wrong credentials, after 3 attempts, send a reset password email
                 if error?.localizedDescription == "The password is invalid or the user does not have a password." {
@@ -43,40 +45,40 @@ struct LoginView: View {
                     if loginAttempt >= 3 {
                         Auth.auth().sendPasswordReset(withEmail: username) { error in
                             if error != nil {
-                                session.errorMessage = error?.localizedDescription ?? "Unkown Error"
-                                errorSignIn.toggle()
+                                errorMessage = error?.localizedDescription ?? "Unkown Error"
+                                showErrorAlert.toggle()
                             } else {
                                 loginAttempt = 0
-                                session.errorMessage = "3 Login attempts failed, we have just sent you a reset password email."
-                                errorSignIn.toggle()
+                                errorMessage = "3 Login attempts failed, we have just sent you a reset password email."
+                                showErrorAlert.toggle()
                             }
                         }
                     } else {
-                        session.errorMessage = "\(String(describing: error!.localizedDescription))\nYou have used \(loginAttempt) out of 3 attempts"
-                        errorSignIn.toggle()
+                        errorMessage = "\(String(describing: error!.localizedDescription))\nYou have used \(loginAttempt) out of 3 attempts"
+                        showErrorAlert.toggle()
                     }
                 } else {
                     //if the error is other than wrong credential, show an alert with the error message
-                    session.errorMessage = error?.localizedDescription ?? "Unkown Error"
-                    errorSignIn.toggle()
+                    errorMessage = error?.localizedDescription ?? "Unkown Error"
+                    showErrorAlert.toggle()
                 }
                 
             } else {
                 //UserEmail not verified, bounce back the login, inviting the user to verify the email first
                 if !result!.user.isEmailVerified {
-                    session.errorMessage = "Please verify the email that we sent you."
-                    errorSignIn.toggle()
+                    errorMessage = "Please verify the email that we sent you."
+                    showErrorAlert.toggle()
                 } else {
                     //user logged in, we now save the credentials in userdefaults to using them next time if we want to log in with faceID
                     print("LOGIN SUCCESS!")
                     passwordUserDefaults = password
                     userEmailUserDefaults = username
                     //if the device has biometrics, and if the user did not ask before to "do not ask again", we ask the user if he wants to use faceID the next time
-                    if askFaceIDActivationRequest && !faceID && laContect.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)  {
+                    if askFaceIDActivationRequest && !faceIDIsOn && laContect.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)  {
                         showFaceIDActivationRequest.toggle()
                     } else {
                         //if the user has already chosen to "do not ask again faceID", we just log in
-                        session.userPresent = true
+                        user.userPresent = true
                     }
                 }
                 
@@ -86,7 +88,7 @@ struct LoginView: View {
     
     // MARK: - BODY
     
-
+    
     var body: some View {
         
         VStack(alignment: .center, spacing: 6, content: {
@@ -182,6 +184,7 @@ struct LoginView: View {
                     .modifier(StrokeButtonModifier(strokeWidth: 200))
                     .padding(25)
             })//BUTTON
+            
                 .onAppear(perform: {withAnimation(.easeOut(duration: 1)) {animation.toggle()}})
             
             
@@ -190,18 +193,20 @@ struct LoginView: View {
         })//VSTACK
         
         // MARK: - ALERTS
+        
+        //ALERT FACEID ACTIVATION REQUEST
         //login successful, we now ask if the user wants to use faceID for the next time. we have already screened if the device has biometrics
             .alert("FaceID", isPresented: $showFaceIDActivationRequest,
                    actions: {
                 Button {
                     //activate faceID and release the access to the user
-                    faceID = true
-                    session.userPresent = true
+                    faceIDIsOn = true
+                    user.userPresent = true
                 } label: {
                     Text("OK")
                 }
                 Button {
-                    //we cklose this alert and we present another one asking if the user wants a reminder next time
+                    //we close this alert and we present another one asking if the user wants a reminder next time
                     showFaceIDActivationRequest = false
                     showFaceIDAskAgainRequest.toggle()
                 } label: {
@@ -211,13 +216,16 @@ struct LoginView: View {
             }, message: {
                 Text("Login success! \n Do you want to use FaceID next time?\nActivate FaceID?")
             })//ALERT FACEID ACTIVATION REQUEST
+        
+        
+        //ALERT FACEID ASK AGAIN REQUEST
         //the user chose not to use faceID for now, but we now ask him if he wants us to remind this next time he login
             .alert("FaceID", isPresented: $showFaceIDAskAgainRequest,
                    actions: {
                 Button {
                     //we keep track that the user wants a reminder for next time, saving this parameter in userdefaults
                     askFaceIDActivationRequest = true
-                    session.userPresent = true
+                    user.userPresent = true
                 } label: {
                     Text("OK")
                 }
@@ -225,21 +233,24 @@ struct LoginView: View {
                     //we keep track that the user does not wat a reminder for next time, saving this parameter in userdefaults. since now on, the user will have to activate faceID in the settings only
                     askFaceIDActivationRequest = false
                     showFaceIDAskAgainRequest = false
-                    session.userPresent = true
+                    user.userPresent = true
                 } label: {
                     Text("NO")
                 }
                 
             }, message: {
                 Text("Do you want me to remind you FaceID request next time you login?\n You can always activate FaceID later in the settings!")
-            })//ALERT FACEID ACTIVATION REQUEST
-            .alert("Error", isPresented: $errorSignIn,
+            })//ALERT FACEID ASK AGAIN REQUEST
+        
+        
+        //ERROR ALERT reusable from this view
+            .alert("Error", isPresented: $showErrorAlert,
                    actions: {
                 Button("OK", role: .cancel) { }
             },
                    message: {
-                Text(session.errorMessage)
-            })//ALERT FACEID ACTIVATION REQUEST
+                Text(errorMessage)
+            })//ERROR ALERT reusable from this view
         
             .background(Image("background"))
         

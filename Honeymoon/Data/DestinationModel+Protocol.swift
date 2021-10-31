@@ -6,29 +6,23 @@
 //
 
 import SwiftUI
-import Firebase
 
 
 //MODEL DESTINATION AND PROMOTION
-struct Destination {
+struct Destination: DestinationProtocol {
     var id: String
     var place: String
     var country: String
     var image: String
     var like: Bool?
     var promotionFrom: String
-    var promotions: [Promotion]
+    var promotions: [PromotionProtocol]
 }
 
-struct Promotion {
+struct Promotion: PromotionProtocol {
     var title: String
     var description: String
     var price: String
     var image: String
 }
 
-// MARK: - DESTINATIONS STORED FILE
-var destinationsArray: [Destination] = [Destination]()
-
-// MARK: - FIRESTORE REFERENCE
-let db = Firestore.firestore()

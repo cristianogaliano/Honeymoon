@@ -10,7 +10,7 @@ import LocalAuthentication
 
 struct InfoView: View {
     @Environment(\.presentationMode) var presentationMode
-    @AppStorage("FaceID") var faceID: Bool = false
+    @AppStorage("faceIDIsOn") var faceIDIsOn: Bool = false
     let laContext = LAContext()
     
     
@@ -25,7 +25,7 @@ struct InfoView: View {
                     .fontWeight(.black)
                     .modifier(TitleModifier())
                 if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-                    Toggle(isOn: $faceID) {
+                    Toggle(isOn: $faceIDIsOn) {
                         Text("FaceID")
                     }
                 }

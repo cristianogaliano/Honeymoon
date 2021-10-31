@@ -4,8 +4,7 @@ import SwiftUI
 
 struct DestinationListView: View {
     let like: Bool
-    let destination: Destination
-    @EnvironmentObject var session: SessionStore
+    let destination: DestinationProtocol
 
     
     
@@ -57,10 +56,10 @@ struct DestinationListView_Previews: PreviewProvider {
     
     
     static var previews: some View {
-        DestinationListView(like: true, destination: demoDestinations[0])
+        DestinationListView(like: true, destination: DestinationsData[0])
             .previewLayout(.sizeThatFits)
             .padding()
-        DestinationListView(like: false, destination: demoDestinations[1])
+        DestinationListView(like: false, destination: DestinationsData[1])
             .previewLayout(.sizeThatFits)
             .padding()
     }

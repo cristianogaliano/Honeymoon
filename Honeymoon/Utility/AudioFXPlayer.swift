@@ -8,6 +8,8 @@
 import Foundation
 import AVFoundation
 
+let audioFXPlayer = AudioFXPlayer()
+
 class AudioFXPlayer {
     var audioPlayer: AVAudioPlayer?
 
@@ -44,4 +46,3 @@ class AudioFXPlayer {
     
 }
 
-let audioFXPlayer = AudioFXPlayer()

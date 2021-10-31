@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PackageView: View {
-    var promotion: Promotion
+    var promotion: PromotionProtocol
     @State private var animation: Bool = false
 
     var body: some View {
@@ -53,7 +53,7 @@ struct PackageView: View {
 
 struct PackageView_Previews: PreviewProvider {
     static var previews: some View {
-        PackageView(promotion: demoDestinations[0].promotions[0])
+        PackageView(promotion: DestinationsData[0].promotions[0])
             .previewLayout(.sizeThatFits)
             .padding()
     }

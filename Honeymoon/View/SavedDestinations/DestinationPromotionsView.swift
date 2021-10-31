@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DestinationPromotionsView: View {
-    let destination: Destination
+    let destination: DestinationProtocol
     
     
     
@@ -72,6 +72,6 @@ struct DestinationPromotionsView: View {
 
 struct DestinationPromotionsView_Previews: PreviewProvider {
     static var previews: some View {
-        DestinationPromotionsView(destination: demoDestinations[0])
+        DestinationPromotionsView(destination: DestinationsData[0])
     }
 }
