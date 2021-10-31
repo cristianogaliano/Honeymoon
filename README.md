@@ -3,6 +3,8 @@
 
 ### iOS Tinder-Like app for choosing honeymoon destinations
 
+- Firebase AuthLogin and Firestore online Database
+- Auth with FaceID
 - Advanced iOS and iPadOS 
 - Launch Screen and App Icons
 - Reusable UI components
